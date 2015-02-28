@@ -8,11 +8,12 @@ public class CollectionUtilTest{
 
 	@Test
 	public void map_returns_new_list_with_incremented_integerValues(){
-		List<Integer> list = new ArrayList<Integer>();
+		List<String> list = new ArrayList<String>();
 		List<Integer> expected = new ArrayList<Integer>();
-		ListMapper map = new Mapper();
-		list.add(1); list.add(2); list.add(3);
-		expected.add(2); expected.add(3); expected.add(4);
+		ListMapper<Integer,String> map = new Mapper();
+		list.add("1"); list.add("2"); list.add("3");
+		expected.add(1); expected.add(2); expected.add(3);
+		
 		List<Integer> result = CollectionUtils.map(list, map);
 		for (int i=0; i<3; i++) 
 			assertEquals(expected.get(i), result.get(i));
@@ -25,12 +26,10 @@ public class CollectionUtilTest{
 		ListFilter map = new Filter();
 		list.add(1); list.add(2); list.add(3); list.add(4);
 		expected.add(2); expected.add(4);
+		
 		List<Integer> result = CollectionUtils.filter(list, map);
 		for (int i=0; i<2; i++) 
 			assertEquals(expected.get(i), result.get(i));
 	}
 
-
 }
-
-
