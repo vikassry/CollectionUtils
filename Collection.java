@@ -8,12 +8,16 @@ interface ListFilter<E,K>{
 	public List<Integer> giveEven(List<Integer> list);
 }
 
+interface ListReducer<E,K>{
+	public K giveTotalLength(List<E> list,  K initial);
+}
+
+
 class Mapper implements ListMapper<Integer,String>{
 	public List<Integer> giveList(List<String> list){
 		List<Integer> new_list = new ArrayList<Integer>();
-		for (String i:list) {
+		for (String i:list)
 			new_list.add(Integer.parseInt(i));
-		}
 		return new_list;	
 	}
 }
@@ -21,12 +25,28 @@ class Mapper implements ListMapper<Integer,String>{
 class Filter implements ListFilter<Integer,Integer>{
 	public List<Integer> giveEven(List<Integer> list){
 		List<Integer> filtered_list = new ArrayList<Integer>();
-		for (Integer i:list) {
+		for (Integer i:list)
 			if(i%2==0) filtered_list.add(i);
-		}
 		return filtered_list;
 	}
 }
+
+class Reducer implements ListReducer<String, Integer>{
+	public Integer giveTotalLength(List<String> list,Integer initial){
+		for (String str : list) 
+			initial += str.length();
+		return initial;
+	}
+}
+
+class Reducer1 implements ListReducer<Integer, Integer>{
+	public Integer giveTotalLength(List<Integer> list,Integer initial){
+		for (Integer i : list) 
+			initial += i;
+		return initial;
+	}
+}
+
 
 class CollectionUtils{
 	public static List<Integer> map(List<String> list, ListMapper<Integer,String> mapper){
@@ -34,6 +54,12 @@ class CollectionUtils{
 	}
 	public static List<Integer> filter(List<Integer> list, ListFilter<Integer,Integer> filter){
 		return filter.giveEven(list);
+	}
+	public static Integer str_reduce(List<String> list, ListReducer<String,Integer> reduce, Integer initial){
+		return reduce.giveTotalLength(list, initial);
+	}
+	public static Integer int_reduce(List<Integer> list, ListReducer<Integer,Integer> reduce, Integer initial){
+		return reduce.giveTotalLength(list, initial);
 	}
 }
 

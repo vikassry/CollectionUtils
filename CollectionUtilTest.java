@@ -32,4 +32,33 @@ public class CollectionUtilTest{
 			assertEquals(expected.get(i), result.get(i));
 	}
 
+	@Test
+	public void reduce_returns_total_length_of_all_strings_in_the_list(){
+		List<String> list = new ArrayList<String>();
+		ListReducer<String,Integer> reduce = new Reducer();
+		list.add("hiii"); list.add("vikas"); list.add("bye"); list.add("vikas");
+		
+		int result = CollectionUtils.str_reduce(list, reduce, 0);
+		assertEquals(result, 17);
+	}
+
+	@Test
+	public void reduce_returns_0_as_length_of_all_strings_in_the_list_are_empty(){
+		List<String> list = new ArrayList<String>();
+		ListReducer<String,Integer> reduce = new Reducer();
+		list.add(""); list.add(""); list.add(""); list.add("");
+		
+		int result = CollectionUtils.str_reduce(list, reduce, 0);
+		assertEquals(result, 0);
+	}
+
+	@Test
+	public void reduce_returns_as_length_of_all_strings_in_the_list_are_empty(){
+		List<Integer> list = new ArrayList<Integer>();
+		ListReducer<Integer,Integer> reduce = new Reducer1();
+		list.add(5); list.add(5); list.add(5); list.add(5);
+		
+		int result = CollectionUtils.int_reduce(list, reduce, 0);
+		assertEquals(result, 20);
+	}
 }
