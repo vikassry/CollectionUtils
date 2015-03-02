@@ -66,14 +66,11 @@ class CollectionUtils{
 public class Collection{
 	public static void main(String[] args) {
 		List<String> list = new ArrayList<String>();
-		ListMapper<Integer, String> lm = new Mapper();
+		ListReducer<String,Integer> lm = new Reducer();
 		list.add("1"); 
 		list.add("2"); 
 		list.add("3");
-		list.add("4");
-		List<Integer> result = CollectionUtils.map(list, lm);
-		for (Integer i : result) {
-			System.out.println(i);	
-		}
+		list.add("4sdsd");
+		System.out.println(CollectionUtils.str_reduce(list, lm, 0));	
 	}
 };
